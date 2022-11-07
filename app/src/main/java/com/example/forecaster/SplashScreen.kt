@@ -11,6 +11,7 @@ import android.location.Location
 import android.location.LocationManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.os.Looper
 import android.provider.Settings
 import android.util.Log
@@ -32,11 +33,17 @@ class SplashScreen : AppCompatActivity() {
 
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
-        getLastLocation()
+        var location_model : com.example.forecaster.model.Location = getLastLocation()
+        print(location_model.lat)
+        Handler().postDelayed({
+            startActivity(Intent(this, MainActivity::class.java))
+            finish()
+        }, 3000)
     }
 
     @SuppressLint("MissingPermission")
-    private fun getLastLocation() {
+    private fun getLastLocation() : com.example.forecaster.model.Location {
+        var location_model = com.example.forecaster.model.Location(0.0,0.0,"dhaka", "bd")
         if (checkPermissions()) {
             if (isLocationEnabled()) {
 
@@ -45,8 +52,8 @@ class SplashScreen : AppCompatActivity() {
                     if (location == null) {
                         requestNewLocationData()
                     } else {
-                        findViewById<TextView>(R.id.tvLatitude).text = location.latitude.toString()
-                        findViewById<TextView>(R.id.tvLongitude).text = location.longitude.toString()
+                        location_model = com.example.forecaster.model.Location(location.latitude, location.longitude, "dhaka", "bd")
+
                     }
                 }
             } else {
@@ -57,6 +64,7 @@ class SplashScreen : AppCompatActivity() {
         } else {
             requestPermissions()
         }
+        return location_model;
     }
 
     @SuppressLint("MissingPermission")
@@ -77,8 +85,6 @@ class SplashScreen : AppCompatActivity() {
     private val mLocationCallback = object : LocationCallback() {
         override fun onLocationResult(locationResult: LocationResult) {
             var mLastLocation: Location = locationResult.lastLocation!!
-            findViewById<TextView>(R.id.tvLatitude).text = mLastLocation.latitude.toString()
-            findViewById<TextView>(R.id.tvLongitude).text = mLastLocation.longitude.toString()
         }
     }
 
