@@ -4,10 +4,11 @@ import android.annotation.SuppressLint
 import java.text.SimpleDateFormat
 import java.util.*
 
-object Contants {
+object Constants {
+    const val API_KEY = "2dfe887bc005aa484dbb4d1bcb17deab"
+    const val CITY = "dhaka,bd"
     const val BASE_URL = "https://api.openweathermap.org/data/2.5/weather?"
     const val BASE_URL_FORECAST = "https://api.openweathermap.org/data/2.5/forecast?"
-    const val OPEN_WEATHER_API_KEY = "d9abb2c1d05c5882e937cffd1ecd4923"
 
     @SuppressLint("SimpleDateFormat")
     fun  getDate(date: Long): String {

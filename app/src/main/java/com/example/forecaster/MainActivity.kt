@@ -1,27 +1,20 @@
 package com.example.forecaster
 
 
-import android.graphics.Color
 import android.os.AsyncTask
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.ProgressBar
 import android.widget.RelativeLayout
 import android.widget.TextView
-import android.widget.Toast
-import com.android.volley.Request
-import com.android.volley.Response
-import com.android.volley.toolbox.JsonObjectRequest
-import com.android.volley.toolbox.Volley
-import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationServices
-import kotlinx.android.synthetic.main.activity_main.*
+import androidx.appcompat.app.AppCompatActivity
+import com.example.forecaster.client.WeatherInfoClient
+import com.example.forecaster.model.datamodel.Weather
 import org.json.JSONObject
 import java.net.URL
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.math.ceil
 
 
 class MainActivity : AppCompatActivity() {
@@ -29,15 +22,17 @@ class MainActivity : AppCompatActivity() {
     val CITY: String = "dhaka,bd"
     val API: String = "2dfe887bc005aa484dbb4d1bcb17deab"
 
+    val weather_info_client = WeatherInfoClient()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         weatherTask().execute()
     }
 
 
     inner class weatherTask() : AsyncTask<String, Void, String>() {
+
         override fun onPreExecute() {
             super.onPreExecute()
             /* Showing the ProgressBar, Making the main design GONE */
@@ -47,14 +42,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         override fun doInBackground(vararg params: String?): String? {
-            var response:String?
-            try{
-                response = URL("https://api.openweathermap.org/data/2.5/weather?q=$CITY&units=metric&appid=$API").readText(
-                    Charsets.UTF_8
-                )
-            }catch (e: Exception){
-                response = null
-            }
+            var response : String? = weather_info_client.getWeatherData()
+            Log.d("Response", response.toString())
             return response
         }
 
