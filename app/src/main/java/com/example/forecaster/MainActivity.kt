@@ -10,9 +10,7 @@ import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.forecaster.client.WeatherInfoClient
-import com.example.forecaster.model.datamodel.Weather
 import org.json.JSONObject
-import java.net.URL
 import java.text.SimpleDateFormat
 import java.util.*
 

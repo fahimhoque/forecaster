@@ -1,8 +1,13 @@
-package com.example.forecaster.model.datamodel
+package com.example.example
 
-data class Weather(
-    val description: String,
-    val icon: String,
-    val id: Int,
-    val main: String
+import com.google.gson.annotations.SerializedName
+
+
+data class Weather (
+
+  @SerializedName("id"          ) var id          : Int?    = null,
+  @SerializedName("main"        ) var main        : String? = null,
+  @SerializedName("description" ) var description : String? = null,
+  @SerializedName("icon"        ) var icon        : String? = null
+
 )
