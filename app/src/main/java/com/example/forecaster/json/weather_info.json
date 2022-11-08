@@ -1,0 +1,43 @@
+{
+  "coord": {
+    "lon": 90.4074,
+    "lat": 23.7104
+  },
+  "weather": [
+    {
+      "id": 721,
+      "main": "Haze",
+      "description": "haze",
+      "icon": "50n"
+    }
+  ],
+  "base": "stations",
+  "main": {
+    "temp": 25.99,
+    "feels_like": 25.99,
+    "temp_min": 25.99,
+    "temp_max": 25.99,
+    "pressure": 1013,
+    "humidity": 69
+  },
+  "visibility": 3500,
+  "wind": {
+    "speed": 0,
+    "deg": 0
+  },
+  "clouds": {
+    "all": 40
+  },
+  "dt": 1667937837,
+  "sys": {
+    "type": 1,
+    "id": 9145,
+    "country": "BD",
+    "sunrise": 1667952528,
+    "sunset": 1667992536
+  },
+  "timezone": 21600,
+  "id": 1185241,
+  "name": "Dhaka",
+  "cod": 200
+}
