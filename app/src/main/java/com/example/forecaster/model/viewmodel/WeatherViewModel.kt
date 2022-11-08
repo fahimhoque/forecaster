@@ -1,4 +1,6 @@
 package com.example.forecaster.model.viewmodel
 
-class WeatherViewModel {
+import androidx.lifecycle.ViewModel
+
+class WeatherViewModel : ViewModel() {
 }
