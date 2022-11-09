@@ -3,16 +3,18 @@ package com.example.forecaster
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.example.forecaster.client.WeatherInfoClient
+import androidx.lifecycle.ViewModelProvider
+import com.example.forecaster.model.viewmodel.ForecastViewModel
 
 class MainActivity : AppCompatActivity() {
 
-    val weather_info_client = WeatherInfoClient()
+    private lateinit var vm:ForecastViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        weather_info_client.get5Day3HourWeatherForecast()
+
+        vm = ViewModelProvider(this)[ForecastViewModel::class.java]
     }
 
 }
