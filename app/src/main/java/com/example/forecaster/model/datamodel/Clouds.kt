@@ -1,10 +1,13 @@
-package com.example.example
+package com.faskn.app.weatherapp.domain.model
 
-import com.google.gson.annotations.SerializedName
+import android.os.Parcelable
+import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
+import kotlinx.android.parcel.Parcelize
 
-
-data class Clouds (
-
-  @SerializedName("all" ) var all : Int? = null
-
-)
+@Parcelize
+@JsonClass(generateAdapter = true)
+data class Clouds(
+    @Json(name = "all")
+    val all: Int?
+) : Parcelable

@@ -1,10 +1,14 @@
-package com.example.example
+package com.faskn.app.weatherapp.domain.model
 
-import com.google.gson.annotations.SerializedName
+import android.os.Parcelable
+import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
+@JsonClass(generateAdapter = true)
+data class Sys(
 
-data class Sys (
-
-  @SerializedName("pod" ) var pod : String? = null
-
-)
+    @Json(name = "pod")
+    val pod: String?
+) : Parcelable

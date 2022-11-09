@@ -7,17 +7,8 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 @JsonClass(generateAdapter = true)
-data class City(
+data class Rain(
 
-    @Json(name = "country")
-    val country: String?,
-
-    @Json(name = "coord")
-    val coord: Coord?,
-
-    @Json(name = "name")
-    val name: String?,
-
-    @Json(name = "id")
-    val id: Int?
+    @Json(name = "3h")
+    val jsonMember3h: Double?
 ) : Parcelable
