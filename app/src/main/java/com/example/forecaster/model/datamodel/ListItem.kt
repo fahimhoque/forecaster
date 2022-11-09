@@ -1,4 +1,4 @@
-package com.faskn.app.weatherapp.domain.model
+package com.example.forecaster.model.datamodel
 
 import android.graphics.Color
 import android.os.Parcelable

@@ -1,4 +1,4 @@
-package com.faskn.app.weatherapp.domain.model
+package com.example.forecaster.model.datamodel
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
