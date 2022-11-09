@@ -5,7 +5,6 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.forecaster.client.WeatherInfoClient
 
-
 class MainActivity : AppCompatActivity() {
 
     val weather_info_client = WeatherInfoClient()
@@ -16,3 +15,4 @@ class MainActivity : AppCompatActivity() {
     }
 
 }
+

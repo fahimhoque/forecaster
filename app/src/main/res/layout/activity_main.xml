@@ -5,47 +5,78 @@
 
    <data>
 
-      <variable
-          name="viewModel"
-          type="com.example.forecaster.model.viewmodel.MainActivityViewModel" />
+<!--      <variable-->
+<!--          name="viewModel"-->
+<!--          type="com.example.forecaster.model.viewmodel.MainActivityViewModel" />-->
 
    </data>
 
-   <androidx.drawerlayout.widget.DrawerLayout
-       android:id="@+id/drawer_layout"
+   <RelativeLayout
+       android:id="@+id/rootView"
        android:layout_width="match_parent"
-       android:layout_height="match_parent"
-       tools:context=".MainActivity">
+       android:layout_height="wrap_content"
+       android:background="@color/white"
+       android:fitsSystemWindows="true"
+       tools:context=".ui.dashboard.DashboardFragment">
 
-      <RelativeLayout
-          android:id="@+id/rootView"
+      <androidx.core.widget.NestedScrollView
+          android:id="@+id/scrollView"
           android:layout_width="match_parent"
           android:layout_height="match_parent"
-          tools:context=".ui.main.MainActivity">
+          android:background="@android:color/white">
 
-         <androidx.appcompat.widget.Toolbar
-             android:id="@+id/toolbar"
-             style="@style/ToolBarStyle"
-             android:layout_width="match_parent"
-             android:layout_height="?attr/actionBarSize"
-             android:background="@color/white"
-             android:gravity="center">
+         <RelativeLayout
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipToday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="16dp"
+                android:checkable="false"
+                android:checked="true"
+                android:clickable="false"
+                android:text="Today"
+                android:textColor="@color/chipTextColor"
+                app:chipBackgroundColor="@color/chipItemBackgroundColor" />
+
+            <include
+                android:id="@+id/container_forecast"
+                layout="@layout/layout_dashboard_forecast"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/chipToday"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="32dp" />
 
             <TextView
-                android:id="@+id/textViewToolbarTitle"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginEnd="24dp"
-                android:gravity="center"
-                android:text="@{viewModel.toolbarTitle}"
+                android:id="@+id/textViewForecastHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/container_forecast"
+                android:layout_marginStart="16dp"
+                android:text="Next 5 Days"
                 android:textColor="@color/mainTextColor"
                 android:textSize="19sp"
                 android:textStyle="bold" />
 
-         </androidx.appcompat.widget.Toolbar>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerForecast"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textViewForecastHeader"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="14dp"
+                android:layout_marginEnd="8dp"
+                android:orientation="horizontal"
+                tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_forecast" />
+         </RelativeLayout>
+      </androidx.core.widget.NestedScrollView>
 
-      </RelativeLayout>
-
-
-   </androidx.drawerlayout.widget.DrawerLayout>
+   </RelativeLayout>
 </layout>
