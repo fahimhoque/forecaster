@@ -36,20 +36,20 @@ class MainActivity : AppCompatActivity() {
                 var snow = Snow(it.list?.get(i)?.snow?.jsonMember3h)
                 var main = Main(
                     it.list?.get(i)?.main?.temp,
-                    it.list?.get(i)?.main?.feelsLike,
-                    it.list?.get(i)?.main?.tempMin,
-                    it.list?.get(i)?.main?.tempMax,
+                    it.list?.get(i)?.main?.feels_like,
+                    it.list?.get(i)?.main?.temp_min,
+                    it.list?.get(i)?.main?.temp_max,
                     it.list?.get(i)?.main?.pressure,
-                    it.list?.get(i)?.main?.seaLevel,
-                    it.list?.get(i)?.main?.grndLevel,
+                    it.list?.get(i)?.main?.sea_level,
+                    it.list?.get(i)?.main?.grnd_level,
                     it.list?.get(i)?.main?.humidity,
-                    it.list?.get(i)?.main?.tempKf,
+                    it.list?.get(i)?.main?.temp_kf,
                 )
                 var clouds = Clouds(it.list?.get(i)?.clouds?.all)
                 var sys = Sys(it.list?.get(i)?.sys?.pod)
 
                 var wind = Wind(it.list?.get(i)?.wind?.deg,it.list?.get(i)?.wind?.speed)
-                val listItem = ListItem(it.list?.get(i)?.dt, rain, it.list?.get(i)?.dtTxt,snow,main,clouds,sys, wind)
+                val listItem = ListItem(it.list?.get(i)?.dt, rain, it.list?.get(i)?.dt_txt,snow,main,clouds,sys, wind)
                 arr.add(listItem)
                 Log.d("array in main", arr.toString())
             }
@@ -58,12 +58,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initRecyclerView(arr: List<ListItem>) {
-        Log.d("Recycler View", arr[0].main.toString())
         var recyclerAdapter: ListItemAdapter
-        recyclerForecast.layoutManager = LinearLayoutManager(this)
+        recyclerForecast.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         recyclerAdapter = ListItemAdapter(this)
         recyclerForecast.adapter =recyclerAdapter
-//        recyclerAdapter.setListItem(arr)
+        recyclerAdapter.setListItem(arr)
     }
 
 }

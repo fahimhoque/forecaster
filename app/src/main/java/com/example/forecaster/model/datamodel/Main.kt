@@ -21,29 +21,29 @@ import kotlinx.android.parcel.Parcelize
 @JsonClass(generateAdapter = true)
 data class Main(
 
-    @Json(name = "temp")
+    @field:Json(name = "temp")
     val temp: Double?,
-    @Json(name = "feels_like")
-    val feelsLike: Double?,
-    @Json(name = "temp_min")
-    val tempMin: Double?,
-    @Json(name = "temp_max")
-    val tempMax: Double?,
-    @Json(name = "pressure")
+    @field:Json(name = "feels_like")
+    val feels_like: Double?,
+    @field:Json(name = "temp_min")
+    val temp_min: Double?,
+    @field:Json(name = "temp_max")
+    val temp_max: Double?,
+    @field:Json(name = "pressure")
     val pressure: Double?,
-    @Json(name = "sea_level")
-    val seaLevel: Double?,
-    @Json(name = "grnd_level")
-    val grndLevel: Double?,
-    @Json(name = "humidity")
+    @field:Json(name = "sea_level")
+    val sea_level: Double?,
+    @field:Json(name = "grnd_level")
+    val grnd_level: Double?,
+    @field:Json(name = "humidity")
     val humidity: Double?,
-    @Json(name = "temp_kf")
-    val tempKf: Double?,
+    @field:Json(name = "temp_kf")
+    val temp_kf: Double?,
 
 ) : Parcelable {
 
     fun getTempString(): String {
-        return temp.toString().substringBefore(".") + "°"
+        return temp.toString() + "°C"
     }
 
     fun getHumidityString(): String {
@@ -51,10 +51,10 @@ data class Main(
     }
 
     fun getTempMinString(): String {
-        return tempMin.toString().substringBefore(".") + "°"
+        return temp_min.toString().substringBefore(".") + "°"
     }
 
     fun getTempMaxString(): String {
-        return tempMax.toString().substringBefore(".") + "°"
+        return temp_max.toString().substringBefore(".") + "°"
     }
 }

@@ -22,7 +22,7 @@ data class ListItem(
     val rain: Rain?,
 
     @Json(name = "dt_txt")
-    val dtTxt: String?,
+    val dt_txt: String?,
 
     @Json(name = "snow")
     val snow: Snow?,
@@ -45,6 +45,8 @@ data class ListItem(
 //    fun getWeatherItem(): WeatherItem? {
 //        return weather?.first()
 //    }
+
+
 
     fun getDay(): String? {
         return dt?.let { getDateTime(it)?.getDisplayName(TextStyle.FULL, Locale.getDefault()) }
@@ -82,7 +84,7 @@ data class ListItem(
     }
 
     fun getHourColor(): Int {
-        return when (dtTxt?.substringAfter(" ")?.substringBeforeLast(":")) {
+        return when (dt_txt?.substringAfter(" ")?.substringBeforeLast(":")) {
             "00:00" -> Color.parseColor("#28E0AE")
             "03:00" -> Color.parseColor("#FF0090")
             "06:00" -> Color.parseColor("#FFAE00")
@@ -96,6 +98,6 @@ data class ListItem(
     }
 
     fun getHourOfDay(): String {
-        return dtTxt?.substringAfter(" ")?.substringBeforeLast(":") ?: "00:00"
+        return dt_txt?.substringAfter(" ")?.substringBeforeLast(":") ?: "00:00"
     }
 }
