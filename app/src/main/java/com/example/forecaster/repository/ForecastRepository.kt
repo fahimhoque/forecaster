@@ -1,5 +1,6 @@
 package com.example.forecaster.repository
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.forecaster.model.datamodel.ForecastResponse
@@ -13,12 +14,12 @@ class ForecastRepository(private val service: RetroServiceInterface) {
 
     suspend fun getForecast() {
         val result = service.getForecast()
+        Log.d("result",result.toString())
         if (result.isSuccessful) {
             val items = result.body()
+            Log.d("items",items.toString())
             if (items!=null){
-//                for(i in 1 until 826)
-//                    forecastLiveData.postValue(items!!)
-
+                forecastLiveData.postValue(items!!)
             }
         }
     }

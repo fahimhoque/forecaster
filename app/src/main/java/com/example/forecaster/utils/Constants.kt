@@ -7,7 +7,7 @@ import java.util.*
 object Constants {
     const val API_KEY = "2dfe887bc005aa484dbb4d1bcb17deab"
     const val CITY = "dhaka,bd"
-    const val BASE_URL = "https://api.openweathermap.org/data/2.5/"
+    const val BASE_URL = "https://api.openweathermap.org"
     const val BASE_URL_WEATHER = "https://api.openweathermap.org/data/2.5/weather?"
     const val BASE_URL_FORECAST = "https://api.openweathermap.org/data/2.5/forecast?"
 

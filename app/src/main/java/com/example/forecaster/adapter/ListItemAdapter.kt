@@ -1,6 +1,7 @@
 package com.example.forecaster.adapter
 
 import android.app.Activity
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,6 +18,7 @@ class ListItemAdapter(val activity: Activity): RecyclerView.Adapter<ListItemAdap
     class MyViewHolder(view : View): RecyclerView.ViewHolder(view){
         val timeOfTheDay = view.cardView.textViewTimeOfDay
         fun bind(data: ListItem, activity: Activity){
+            Log.d("data", data.toString())
             timeOfTheDay.text = data.getDay()
         }
     }
@@ -36,6 +38,7 @@ class ListItemAdapter(val activity: Activity): RecyclerView.Adapter<ListItemAdap
     override fun getItemCount(): Int {
         return if(listItems == null) 0
         else
+            Log.d("ItemSize", listItems?.size.toString())
             listItems?.size!!
     }
 }
