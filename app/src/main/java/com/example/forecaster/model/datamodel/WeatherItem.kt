@@ -24,6 +24,6 @@ data class WeatherItem(
 ) : Parcelable {
 
     fun getDescriptionText(): String? {
-        return description?.capitalize()
+        return description?.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
     }
 }

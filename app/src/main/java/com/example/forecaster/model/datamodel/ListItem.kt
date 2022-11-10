@@ -27,8 +27,8 @@ data class ListItem(
     @Json(name = "snow")
     val snow: Snow?,
 
-    @Json(name = "weather")
-    val weather: List<WeatherItem?>?,
+//    @Json(name = "weather")
+//    val weather: List<WeatherItem?>?,
 
     @Json(name = "main")
     val main: Main?,
@@ -42,9 +42,9 @@ data class ListItem(
     @Json(name = "wind")
     val wind: Wind?
 ) : Parcelable {
-    fun getWeatherItem(): WeatherItem? {
-        return weather?.first()
-    }
+//    fun getWeatherItem(): WeatherItem? {
+//        return weather?.first()
+//    }
 
     fun getDay(): String? {
         return dt?.let { getDateTime(it)?.getDisplayName(TextStyle.FULL, Locale.getDefault()) }
