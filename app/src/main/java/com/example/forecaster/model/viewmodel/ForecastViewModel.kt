@@ -1,23 +1,20 @@
 package com.example.forecaster.model.viewmodel
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.forecaster.model.datamodel.ForecastResponse
-import com.example.forecaster.repository.data.ForecastRepository
+import com.example.forecaster.repository.ForecastRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
-class ForecastViewModel : ViewModel() {
-
-    private var forecastRepository: ForecastRepository?=null
-    var forecastData : MutableLiveData<ForecastResponse?>?=null
-
+class ForecastViewModel(private val forecastRepository: ForecastRepository): ViewModel() {
     init {
-        forecastRepository = ForecastRepository()
-        forecastData = MutableLiveData()
+        viewModelScope.launch(Dispatchers.IO) {
+            forecastRepository.getForecast()
+        }
     }
 
-    fun fetch_forecast(){
-        forecastData = forecastRepository?.fetchForecast()
-    }
+//    val forecast : LiveData<ForecastResponse>
+//        get() = forecastRepository.getForecast()
 }
