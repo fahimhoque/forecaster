@@ -15,6 +15,8 @@ class ForecastViewModel(private val forecastRepository: ForecastRepository): Vie
         }
     }
 
-//    val forecast : LiveData<ForecastResponse>
-//        get() = forecastRepository.getForecast()
+    val forecast : LiveData<ForecastResponse>
+        get() {
+            return forecastRepository.forecast
+        }
 }
