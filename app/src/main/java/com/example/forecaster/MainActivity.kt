@@ -6,6 +6,9 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.work.PeriodicWorkRequest
+import androidx.work.WorkManager
+import androidx.work.multiprocess.RemoteWorkManager
 import com.example.forecaster.adapter.ListItemAdapter
 import com.example.forecaster.model.datamodel.*
 import com.example.forecaster.model.viewmodel.ForecastViewModel
@@ -13,11 +16,14 @@ import com.example.forecaster.model.viewmodel.ForecastViewModelFactory
 import com.example.forecaster.repository.ForecastRepository
 import com.example.forecaster.retrofit.RetroInstance
 import com.example.forecaster.retrofit.RetroServiceInterface
+import com.example.forecaster.worker.RefreshDataWorker
 import com.squareup.moshi.Json
 import kotlinx.android.synthetic.main.activity_main.*
+import java.util.concurrent.TimeUnit
 
 class MainActivity : AppCompatActivity() {
     private lateinit var forecastViewModel: ForecastViewModel
+    private lateinit var workManager: WorkManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,5 +71,12 @@ class MainActivity : AppCompatActivity() {
         recyclerAdapter.setListItem(arr)
     }
 
+    private fun startPeriodicWork() {
+        val periodicWorkRequest = PeriodicWorkRequest
+            .Builder(RefreshDataWorker::class.java, 12, TimeUnit.HOURS)
+            .addTag(RefreshDataWorker.TAG)
+            .build()
+        workManager.enqueue(periodicWorkRequest)
+    }
 }
 

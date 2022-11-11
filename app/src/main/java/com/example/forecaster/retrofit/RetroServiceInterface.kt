@@ -11,6 +11,6 @@ interface RetroServiceInterface {
     suspend fun getForecast() : Response<ForecastResponse>
 
 
-    @GET("/weather?q=${Constants.CITY}&units&appid=${Constants.API_KEY}")
+    @GET("/weather?q=${Constants.CITY}&units=metric&appid=${Constants.API_KEY}")
     suspend fun getWeather(): Response<CurrentWeatherResponse>
 }
