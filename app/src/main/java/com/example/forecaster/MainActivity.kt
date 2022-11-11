@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.work.PeriodicWorkRequest
 import androidx.work.WorkManager
 import androidx.work.multiprocess.RemoteWorkManager
+import com.example.forecaster.adapter.CurrentWeatherAdapter
 import com.example.forecaster.adapter.ListItemAdapter
 import com.example.forecaster.model.datamodel.*
 import com.example.forecaster.model.viewmodel.ForecastViewModel
@@ -19,6 +20,7 @@ import com.example.forecaster.retrofit.RetroServiceInterface
 import com.example.forecaster.worker.RefreshDataWorker
 import com.squareup.moshi.Json
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.layout_dashboard_forecast.*
 import java.util.concurrent.TimeUnit
 
 class MainActivity : AppCompatActivity() {
@@ -30,9 +32,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val service = RetroInstance.getRetroInstance().create(RetroServiceInterface::class.java)
-        val repository = ForecastRepository(service)
+        val forecastRepository = ForecastRepository(service)
         forecastViewModel = ViewModelProvider(this,
-            ForecastViewModelFactory(repository))[ForecastViewModel::class.java]
+            ForecastViewModelFactory(forecastRepository))[ForecastViewModel::class.java]
         forecastViewModel.forecast.observe(this){
             Log.d("it",it.toString())
             var arr = ArrayList<ListItem>()
@@ -60,6 +62,9 @@ class MainActivity : AppCompatActivity() {
                 Log.d("array in main", arr.toString())
             }
             initRecyclerView(arr)
+
+            workManager = WorkManager.getInstance(applicationContext)
+            startPeriodicWork()
         }
     }
 
@@ -69,6 +74,10 @@ class MainActivity : AppCompatActivity() {
         recyclerAdapter = ListItemAdapter(this)
         recyclerForecast.adapter =recyclerAdapter
         recyclerAdapter.setListItem(arr)
+    }
+
+    private fun initCurrentWeatherView(data: CurrentWeatherResponse){
+        var currentWeatherAdapter: CurrentWeatherAdapter
     }
 
     private fun startPeriodicWork() {
