@@ -8,12 +8,15 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.work.PeriodicWorkRequest
 import androidx.work.WorkManager
+import androidx.work.WorkRequest
 import androidx.work.multiprocess.RemoteWorkManager
 import com.example.forecaster.adapter.CurrentWeatherAdapter
 import com.example.forecaster.adapter.ListItemAdapter
 import com.example.forecaster.model.datamodel.*
+import com.example.forecaster.model.viewmodel.CurrentViewModel
 import com.example.forecaster.model.viewmodel.ForecastViewModel
 import com.example.forecaster.model.viewmodel.ForecastViewModelFactory
+import com.example.forecaster.repository.CurrentWeatherRepository
 import com.example.forecaster.repository.ForecastRepository
 import com.example.forecaster.retrofit.RetroInstance
 import com.example.forecaster.retrofit.RetroServiceInterface
@@ -25,6 +28,7 @@ import java.util.concurrent.TimeUnit
 
 class MainActivity : AppCompatActivity() {
     private lateinit var forecastViewModel: ForecastViewModel
+    private lateinit var currentWeatherViewModel: CurrentViewModel
     private lateinit var workManager: WorkManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -86,6 +90,25 @@ class MainActivity : AppCompatActivity() {
             .addTag(RefreshDataWorker.TAG)
             .build()
         workManager.enqueue(periodicWorkRequest)
+        observeWorkerStatus(periodicWorkRequest)
+    }
+
+    private fun observeWorkerStatus(
+        request: WorkRequest
+    ) {
+        workManager.getWorkInfoByIdLiveData(request.id).observe(this) {
+            val workTag = it.tags.first { tag ->
+                !tag.contains('.')
+            }
+            if (workTag.equals(RefreshDataWorker.TAG)) {
+
+            }
+
+            // Show Start and End Time for the worker
+            if (it.state.isFinished) {
+
+            }
+        }
     }
 }
 
